@@ -98,7 +98,10 @@ class AddEditTaskFragmentTest {
         onView(withId(R.id.fab_save_task)).perform(click())
 
         // THEN - Verify that the repository saved the task
-        // TODO
+        val tasks = (repository.getTasksBlocking(true) as Result.Success).data
+        assertEquals(tasks.size, 1)
+        assertEquals(tasks[0].title, "title")
+        assertEquals(tasks[0].description, "description")
     }
 
     @Test
